@@ -1,0 +1,103 @@
+[mod]
+id = "resourcify"
+version = "0.1.0"
+priority = 100
+
+[compatibility]
+horizon_revision = "9d979caa48a3bb58203319b9ea044db58c38e0d8"
+
+# Search, Modrinth's answers, the layout and the checks: no game types, so it has its own tests.
+[[module]]
+id = "runtime"
+file = "crates/horizon-client/src/game.rs"
+name = "native_resourcify"
+source = "runtime.rs"
+
+# The browser screen itself: drawing, mouse, wheel, keys, the network threads.
+[[module]]
+id = "ui"
+file = "crates/horizon-client/src/game.rs"
+name = "native_resourcify_ui"
+source = "ui.rs"
+
+[[injection]]
+id = "listed"
+hook = "mods"
+hook_version = 1
+kind = "HEAD"
+helper = "listed.rs"
+bindings = [{ name = "mods", ty = "&mut Vec<crate::game::native_hooks::NativeMod>", value = "&mut *mods" }]
+
+# Once a frame: a stale "browser is open" flag is cleared when the Options screen is gone.
+[[injection]]
+id = "frame"
+hook = "frame"
+hook_version = 1
+kind = "HEAD"
+helper = "frame.rs"
+bindings = [{ name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" }]
+
+[[injection]]
+id = "options-draw"
+kind = "HEAD"
+cancellable = true
+target = "horizon_client::game::options::Game<'_>::draw_options"
+helper = "options_draw.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+  { name = "batch", ty = "&mut HudBatch", value = "&mut *batch" },
+]
+
+[[injection]]
+id = "options-mouse"
+kind = "HEAD"
+cancellable = true
+target = "horizon_client::game::options::Game<'_>::options_mouse"
+helper = "options_mouse.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+  { name = "pressed", ty = "bool", value = "pressed" },
+  { name = "right", ty = "bool", value = "right" },
+]
+
+[[injection]]
+id = "options-drag"
+kind = "HEAD"
+cancellable = true
+target = "horizon_client::game::options::Game<'_>::options_drag"
+helper = "options_drag.rs"
+bindings = [{ name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" }]
+
+[[injection]]
+id = "options-scroll"
+kind = "HEAD"
+cancellable = true
+target = "horizon_client::game::options::Game<'_>::options_scroll"
+helper = "options_scroll.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+  { name = "amount", ty = "f32", value = "amount" },
+]
+
+[[injection]]
+id = "options-key"
+kind = "HEAD"
+cancellable = true
+target = "horizon_client::game::options::Game<'_>::options_key"
+helper = "options_key.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+  { name = "key", ty = "KeyCode", value = "key" },
+  { name = "text", ty = "Option<&str>", value = "text" },
+]
+
+[[injection]]
+id = "options-shortcut"
+kind = "HEAD"
+cancellable = true
+target = "horizon_client::game::options::Game<'_>::options_shortcut"
+helper = "options_shortcut.rs"
+bindings = [
+  { name = "game", ty = "&mut crate::game::Game<'_>", value = "&mut *self" },
+  { name = "shortcut", ty = "horizon_client::clipboard::EditShortcut", value = "shortcut" },
+]

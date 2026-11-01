@@ -1,0 +1,15 @@
+[package]
+name = "resourcify"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.95"
+license = "MIT"
+description = "Resourcify for Horizon: find and install Modrinth resource packs from the Resource Packs screen"
+
+[lib]
+# This exact source is also injected as a same-crate module by horizon-mixins.
+path = "mixins/resourcify/runtime.rs"
+
+[workspace]
+members = ["tools/audit"]
+resolver = "2"
