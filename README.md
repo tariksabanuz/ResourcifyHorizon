@@ -37,7 +37,7 @@ packs in `resourcepacks/` and a list of what it installed in `resourcify/install
 
 ## Build and test
 
-Pinned to Horizon `9d979caa48a3bb58203319b9ea044db58c38e0d8` and horizon-mixins `d9c83d7`
+Pinned to Horizon `f319701e8c9ab657ff562250b3ba07b2d654e3bc` and horizon-mixins `d9c83d7`
 (`compatibility.json`):
 
 ```sh
