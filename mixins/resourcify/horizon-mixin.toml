@@ -4,7 +4,7 @@ version = "0.1.0"
 priority = 100
 
 [compatibility]
-horizon_revision = "f319701e8c9ab657ff562250b3ba07b2d654e3bc"
+horizon_revision = "66f3981f522b24c250b21523a70080965b940424"
 
 # Search, Modrinth's answers, the layout and the checks: no game types, so it has its own tests.
 [[module]]
