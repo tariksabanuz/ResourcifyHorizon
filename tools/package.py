@@ -9,6 +9,7 @@ Horizon revision. Based on levzzz5154's packager for Veinminer.
 import hashlib
 import json
 from pathlib import Path
+import re
 import tomllib
 import zipfile
 
@@ -30,6 +31,12 @@ def package():
         raise SystemExit('the registry takes ids of lowercase letters, digits and _ only')
     if mixin.get('compatibility', {}).get('horizon_revision') != compat['horizon_revision']:
         raise SystemExit('horizon-mixin.toml and compatibility.json pin different Horizon revisions')
+    # The bundle's version and the one the mod shows in its list must be one: the published source
+    # is the exact source of the packaged file (MOD-POLICY promise 5).
+    cargo = tomllib.loads((ROOT / 'Cargo.toml').read_text())['package']['version']
+    shown = re.search(r'pub const VERSION: &str = "([^"]+)";', (bundle / 'runtime.rs').read_text())
+    if not shown or shown.group(1) != mod['version'] or cargo != mod['version']:
+        raise SystemExit(f"versions differ: horizon-mixin.toml {mod['version']}, Cargo.toml {cargo}, runtime.rs {shown and shown.group(1)}")
     manifest = dict(schema=1, id=mod['id'], version=mod['version'], game=GAME,
                     horizon=compat['horizon_revision'], mixins=compat['horizon_mixins_revision'])
     files = {'horizon-native.json': (json.dumps(manifest, indent=2, sort_keys=True) + '\n').encode()}

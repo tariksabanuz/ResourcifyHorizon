@@ -44,7 +44,7 @@ Pinned to Horizon `66f3981f522b24c250b21523a70080965b940424` and horizon-mixins 
 python3 tools/horizon.py stage --horizon ../horizon
 python3 tools/horizon.py check --horizon ../horizon
 python3 tools/horizon.py build --horizon ../horizon
-python3 tools/package.py        # target/resourcify-0.1.0.hnmod
+python3 tools/package.py        # target/resourcify-0.1.1.hnmod
 ```
 
 The logic (JSON, Modrinth's answers, layout, checks) and its unit tests are in `mixins/resourcify/runtime.rs`;

@@ -13,13 +13,13 @@ use std::sync::atomic::{AtomicBool, Ordering};
 
 pub const ID: &str = "resourcify";
 pub const NAME: &str = "Resourcify";
-pub const VERSION: &str = "0.1.0";
+pub const VERSION: &str = "0.1.1";
 pub const AUTHOR: &str = "tariksabanuz";
-pub const DESCRIPTION: &str = "Adds a + button to the Resource Packs screen that opens a browser for Modrinth's resource packs: search, pick a version made for this game, install it.";
+pub const DESCRIPTION: &str = "By tariksabanuz. Adds a + button to the Resource Packs screen that opens a browser for Modrinth's resource packs: search, pick a version made for this game, install it.";
 /// Modrinth's API.
 pub const API: &str = "https://api.modrinth.com/v2";
 /// Who is asking, as Modrinth's API terms want.
-pub const AGENT: &str = "tariksabanuz/resourcify-horizon/0.1.0 (a Horizon native mod)";
+pub const AGENT: &str = "tariksabanuz/resourcify-horizon/0.1.1 (a Horizon native mod)";
 /// Where Modrinth keeps its files and icons. Nothing else is downloaded.
 pub const FILE_HOST: &str = "https://cdn.modrinth.com/";
 /// Packs asked for at a time.
