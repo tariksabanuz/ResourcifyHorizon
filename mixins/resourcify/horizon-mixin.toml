@@ -1,10 +1,10 @@
 [mod]
 id = "resourcify"
-version = "0.1.1"
+version = "0.1.2"
 priority = 100
 
 [compatibility]
-horizon_revision = "66f3981f522b24c250b21523a70080965b940424"
+horizon_revision = "fdc87aecdbd116bf1e08adcd062fcbaea8c2e2ca"
 
 # Search, Modrinth's answers, the layout and the checks: no game types, so it has its own tests.
 [[module]]
